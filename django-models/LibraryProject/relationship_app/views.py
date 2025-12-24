@@ -5,20 +5,13 @@ from .models import Book, Library
 
 # Function-based view to list all books
 def list_books(request):
-    """
-    Function-based view that lists all books stored in the database.
-    Renders a simple text list of book titles and their authors.
-    """
     books = Book.objects.all()
     return render(request, 'relationship_app/list_books.html', {'books': books})
 
-# Class-based view to display library details
+# Class-based view - SIMPLE VERSION
 class LibraryDetailView(DetailView):
-    """
-    Class-based view that displays details for a specific library,
-    listing all books available in that library.
-    Uses Django's DetailView.
-    """
     model = Library
     template_name = 'relationship_app/library_detail.html'
-    context_object_name = 'library'
+    
+    # This automatically makes the library object available in template
+    # The template can access books using library.books.all()
